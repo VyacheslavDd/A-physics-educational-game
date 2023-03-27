@@ -35,8 +35,9 @@ public class NPCBehaviour : MonoBehaviour
 
     private void GetCorrectAnimation()
     {
-        var pos = GetCorrectPositioning(pointsToGo[currentPoint]);
         StopAllAnimations();
+        if (pointsToGo.Count == 0) return;
+        var pos = GetCorrectPositioning(pointsToGo[currentPoint]);
         if (pos == Positioning.Left) animator.SetBool("walkLeft", true);
         else animator.SetBool("walkRight", true);
     }

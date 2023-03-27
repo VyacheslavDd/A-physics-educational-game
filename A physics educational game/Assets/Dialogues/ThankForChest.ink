@@ -1,3 +1,0 @@
-n Thanks a lot! Wow! You actually did it!
-c No worries, i just did what I had to do.
-n Now we can chill...

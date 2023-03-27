@@ -32,10 +32,10 @@ public class PlayerControl : MonoBehaviour
     {
         direction = new Vector2(Input.GetAxisRaw(horizontal), Input.GetAxisRaw(vertical));
 
-        if (direction.x > 0)
-            transform.rotation = new Quaternion(0, 180, 0, 0);
-        else
-            transform.rotation = new Quaternion(0, 0, 0, 0);
+        //if (direction.x > 0)
+        //    transform.rotation = new Quaternion(0, 180, 0, 0);
+        //else
+        //    transform.rotation = new Quaternion(0, 0, 0, 0);
 
         animator.SetFloat(horizontal, direction.x);
         animator.SetFloat(vertical, direction.y);

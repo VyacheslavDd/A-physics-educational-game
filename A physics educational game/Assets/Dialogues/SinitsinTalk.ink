@@ -1,3 +1,3 @@
-c Hello!
-n Hello. Finish homework before we continue.
-c Ok.
+c Здравствуйте!
+n Здравствуй. Выполни ИДЗ, чтобы приступить к следующей работе.
+c Хорошо.
