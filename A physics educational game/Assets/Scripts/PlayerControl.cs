@@ -32,11 +32,6 @@ public class PlayerControl : MonoBehaviour
     {
         direction = new Vector2(Input.GetAxisRaw(horizontal), Input.GetAxisRaw(vertical));
 
-        //if (direction.x > 0)
-        //    transform.rotation = new Quaternion(0, 180, 0, 0);
-        //else
-        //    transform.rotation = new Quaternion(0, 0, 0, 0);
-
         animator.SetFloat(horizontal, direction.x);
         animator.SetFloat(vertical, direction.y);
         animator.SetFloat(speedStr, direction.sqrMagnitude);
@@ -45,5 +40,24 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         rb.MovePosition(rb.position + speed * direction * Time.deltaTime);
+    }
+
+    public void ResetAnimations()
+    {
+        animator.SetFloat(horizontal, 0);
+        animator.SetFloat(vertical, 0);
+        animator.SetFloat(speedStr, 0);
+    }
+
+    public void RotateToSpeaker(Transform speaker=null)
+    {
+        if (speaker == null) transform.rotation = new Quaternion(0, 0, 0, 0);
+        else
+        {
+            if (speaker.transform.position.x < transform.position.x)
+            {
+                transform.rotation = new Quaternion(0, 180, 0, 0);
+            }
+        }
     }
 }

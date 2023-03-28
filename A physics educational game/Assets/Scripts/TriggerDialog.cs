@@ -10,6 +10,7 @@ public class TriggerDialog : MonoBehaviour
 {
     [SerializeField] private TextAsset jsonDATA;
     private Story story;
+    private static string mainCharacterName = "Δενθρ";
     [SerializeField] private PlayerControl control;
     [SerializeField] private GameObject dialogCanvas;
     [SerializeField] private TextMeshProUGUI nameText;
@@ -19,7 +20,6 @@ public class TriggerDialog : MonoBehaviour
     [SerializeField] private Sprite characterSprite;
     [SerializeField] private string characterName;
     [SerializeField] private Sprite myCharacterSprite;
-    [SerializeField] private string myCharacterName;
     [SerializeField] private ButtonListDialog button;
     [SerializeField] private InfoCoroutine infoCoroutine;
     [SerializeField] private MaxTasksQuantity maxTasks;
@@ -63,7 +63,9 @@ public class TriggerDialog : MonoBehaviour
                     dialogCanvas.SetActive(true);
                     UpdateSpeakerInfo(characterName, characterSprite);
                     GetNextSentenceWithAnalysis(story.Continue());
+                    control.RotateToSpeaker(transform.parent);
                     control.enabled = false;
+                    control.ResetAnimations();
                     button.story = story;
                     button.scriptAfter = scriptAfter;
                     button.triggerDialog = this;
@@ -105,7 +107,7 @@ public class TriggerDialog : MonoBehaviour
         StopAllCoroutines();
         var author = sentence[0];
         var meaning = sentence.Substring(2);
-        if (author == 'c') UpdateSpeakerInfo(myCharacterName, myCharacterSprite);
+        if (author == 'c') UpdateSpeakerInfo(mainCharacterName, myCharacterSprite);
         else UpdateSpeakerInfo(characterName, characterSprite);
         StartCoroutine(writeSentenceLetterByLetter(sentenceText, meaning));
     }

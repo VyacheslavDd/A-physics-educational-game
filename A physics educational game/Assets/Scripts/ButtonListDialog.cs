@@ -43,6 +43,7 @@ public class ButtonListDialog : MonoBehaviour
         if (!story.canContinue)
         {
             playerControl.enabled = true;
+            playerControl.RotateToSpeaker();
             dialogCanvas.SetActive(false);
             triggerDialog.UpdateStory(scriptAfter == null ? justRefuseTalking : requireFinishTask);
             triggerDialog.FinishDialogue();

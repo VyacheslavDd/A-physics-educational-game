@@ -7,22 +7,24 @@ using UnityEngine;
 public class TeleportPlayerToLocation : MonoBehaviour
 {
     [SerializeField] private Vector3 teleportPos;
-    [SerializeField] private GameObject infoText;
+    [SerializeField] private GameObject arrowTeleport;
     [SerializeField] private GameObject teleportPanel;
-    [SerializeField] private GameObject[] gridsToOff;
-    [SerializeField] private GameObject[] gridsToOn;
+    [SerializeField] private GameObject dialogPanel;
+    [SerializeField] private GameObject[] objectsToOff;
+    [SerializeField] private GameObject[] objectsToOn;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerControl>() != null)
         {
-            infoText.SetActive(true);
+            arrowTeleport.SetActive(true);
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerControl>() != null && Input.GetKey(KeyCode.F) && !teleportPanel.activeSelf)
+        if (collision.GetComponent<PlayerControl>() != null && Input.GetKey(KeyCode.F) && !teleportPanel.activeSelf
+            && !dialogPanel.activeSelf)
         {
             teleportPanel.SetActive(true);
             StartCoroutine(MakeTransitionBetween(collision.GetComponent<PlayerControl>()));
@@ -32,22 +34,26 @@ public class TeleportPlayerToLocation : MonoBehaviour
     private void ChangeObjectsState(GameObject[] objs, bool state)
     {
         foreach (var obj in objs)
+        {
             obj.SetActive(state);
+            var npcBehaviour = obj.GetComponent<NPCBehaviour>();
+            if (npcBehaviour != null && state) npcBehaviour.ContinueWhenEnabledAgain();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        infoText.SetActive(false);
+        arrowTeleport.SetActive(false);
     }
 
     private IEnumerator MakeTransitionBetween(PlayerControl player)
     {
-        infoText.SetActive(false);
+        arrowTeleport.SetActive(false);
         yield return new WaitForSeconds(1);
         player.enabled = false;
         player.transform.position = teleportPos;
-        ChangeObjectsState(gridsToOff, false);
-        ChangeObjectsState(gridsToOn, true);
+        ChangeObjectsState(objectsToOff, false);
+        ChangeObjectsState(objectsToOn, true);
         yield return new WaitForSeconds(0.5f);
         player.enabled = true;
         teleportPanel.SetActive(false);
