@@ -26,6 +26,7 @@ public class TriggerDialog : MonoBehaviour
     [SerializeField] private Transform panel;
     [SerializeField] private GameObject warning;
     [SerializeField] private GameObject talkWarning;
+    [SerializeField] private ClassForSharing shareClass;
 
     private void Start()
     {
@@ -114,10 +115,11 @@ public class TriggerDialog : MonoBehaviour
 
     private IEnumerator writeSentenceLetterByLetter(TextMeshProUGUI text, string sentence)
     {
+        var time = shareClass.basicTextSpeed * (1 - PlayerPrefs.GetFloat("textSpeed", shareClass.basicPercent) / 100);
         foreach (var letter in sentence)
         {
             text.text += letter;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(time);
         }
     }
 }
