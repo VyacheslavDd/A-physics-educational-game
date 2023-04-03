@@ -21,6 +21,7 @@ public class PauseGame : MonoBehaviour
             if (!paused)
             {
                 ChangeStates(true, 0.0f);
+                Cursor.visible = true;
                 source.Pause();
             }
             else
@@ -38,6 +39,7 @@ public class PauseGame : MonoBehaviour
         source.UnPause();
         continueButton.SetStandardText();
         paused = !paused;
+        Cursor.visible = false;
     }
 
     private bool CheckIfCanvasesDisabled()
