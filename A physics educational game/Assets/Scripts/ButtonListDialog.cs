@@ -19,6 +19,9 @@ public class ButtonListDialog : MonoBehaviour
     public Story story;
     public TriggerDialog triggerDialog;
 
+    public bool activatePlayer;
+    public bool continueWithPlayer;
+
     private void Start()
     {
         choicesText = new TextMeshProUGUI[choices.Length];
@@ -42,11 +45,16 @@ public class ButtonListDialog : MonoBehaviour
     {
         if (!story.canContinue)
         {
-            playerControl.enabled = true;
-            playerControl.RotateToSpeaker();
+            if (activatePlayer)
+            {
+                playerControl.enabled = true;
+                playerControl.RotateToSpeaker();
+                triggerDialog.FinishDialogue();
+            }
+            if (continueWithPlayer) playerControl.enabled = true;
             dialogCanvas.SetActive(false);
-            triggerDialog.UpdateStory(scriptAfter == null ? justRefuseTalking : requireFinishTask);
-            triggerDialog.FinishDialogue();
+            if (continueWithPlayer) triggerDialog.ResetStory();
+            else triggerDialog.UpdateStory(scriptAfter == null ? justRefuseTalking : requireFinishTask);
             if (scriptAfter != null)
             {
                 scriptAfter.SetActive(true);

@@ -28,6 +28,11 @@ public class TriggerDialog : MonoBehaviour
     [SerializeField] private GameObject talkWarning;
     [SerializeField] private ClassForSharing shareClass;
 
+    [SerializeField] private bool startAutomatically;
+    [SerializeField] private bool hasInfo;
+
+    private bool isIn;
+
     private void Start()
     {
         story = new Story(jsonDATA.text);
@@ -35,7 +40,7 @@ public class TriggerDialog : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerControl>() != null)
+        if (collision.GetComponent<PlayerControl>() != null && !startAutomatically)
         {
             transform.parent.GetComponent<NPCBehaviour>().GetReadyForDialogue();
             talkWarning.SetActive(true);
@@ -46,8 +51,12 @@ public class TriggerDialog : MonoBehaviour
     {
         if (collision.GetComponent<PlayerControl>() != null)
         {
-            talkWarning.SetActive(false);
-            transform.parent.GetComponent<NPCBehaviour>().FinishDialogue();
+            isIn = false;
+            if (!startAutomatically)
+            {
+                talkWarning.SetActive(false);
+                transform.parent.GetComponent<NPCBehaviour>().FinishDialogue();
+            }
         }
     }
 
@@ -55,21 +64,28 @@ public class TriggerDialog : MonoBehaviour
     {
         if (collision.GetComponent<PlayerControl>() != null)
         {
-            if (Input.GetKey(KeyCode.E) && !dialogCanvas.activeSelf)
+            if ((Input.GetKey(KeyCode.E) || startAutomatically) && !dialogCanvas.activeSelf && !isIn)
             {
-                if (panel.childCount <= maxTasks.GetAmountOfMaxTasks())
+                if (panel.childCount <= maxTasks.GetAmountOfMaxTasks() || startAutomatically)
                 {
-                    transform.parent.GetComponent<NPCBehaviour>().GetReadyForDialogue();
+                    isIn = true;
+                    if (!startAutomatically)
+                    {
+                        transform.parent.GetComponent<NPCBehaviour>().GetReadyForDialogue();
+                        control.RotateToSpeaker(transform.parent);
+                        control.enabled = false;
+                        control.ResetAnimations();
+                    }
+                    if (hasInfo) { control.enabled = false; control.ResetAnimations(); }
                     Cursor.visible = true;
                     dialogCanvas.SetActive(true);
                     UpdateSpeakerInfo(characterName, characterSprite);
                     GetNextSentenceWithAnalysis(story.Continue());
-                    control.RotateToSpeaker(transform.parent);
-                    control.enabled = false;
-                    control.ResetAnimations();
                     button.story = story;
                     button.scriptAfter = scriptAfter;
                     button.triggerDialog = this;
+                    button.activatePlayer = !startAutomatically;
+                    button.continueWithPlayer = hasInfo;
                 }
                 else
                 {
@@ -91,8 +107,14 @@ public class TriggerDialog : MonoBehaviour
         this.story = new Story(story.text);
     }
 
+    public void ResetStory()
+    {
+        story = new Story(jsonDATA.text);
+    }
+
     public void FinishDialogue()
     {
+        isIn = false;
         transform.parent.GetComponent<NPCBehaviour>().FinishDialogue();
     }
 

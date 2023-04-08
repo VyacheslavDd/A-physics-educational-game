@@ -77,7 +77,7 @@ public class NPCBehaviour : MonoBehaviour
         StopAllAnimations();
         animator.SetFloat(horizontal, 1);
         isStanding = true;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(pointsToGo.Count > 1 ? 1.5f : 1000f);
         isStanding = false;
         GetCorrectAnimation();
     }
@@ -121,6 +121,13 @@ public class NPCBehaviour : MonoBehaviour
     public void ContinueWhenEnabledAgain()
     {
         StartCoroutine(Stand());
+        GetCorrectAnimation();
+    }
+
+    public void UpdatePointsToGo(List<Transform> points)
+    {
+        currentPoint = 0;
+        pointsToGo = points;
         GetCorrectAnimation();
     }
 }
