@@ -20,7 +20,8 @@ public class EndGameScript : MonoBehaviour
     {
         if (collision.GetComponent<PlayerControl>() != null)
         {
-            music.Stop();
+            Cursor.visible = true;
+            StartCoroutine(StopMusic());
             control.ResetAnimations();
             control.enabled = false;
             pause.enabled = false;
@@ -35,5 +36,14 @@ public class EndGameScript : MonoBehaviour
         endCanvas.SetActive(true);  
         yield return new WaitForSeconds(4f);
         loading.StartLoadingScene();
+    }
+
+    private IEnumerator StopMusic()
+    {
+        while (music.volume > 0)
+        {
+            music.volume -= 0.001f;
+            yield return new WaitForSeconds(0.05f);
+        }
     }
 }

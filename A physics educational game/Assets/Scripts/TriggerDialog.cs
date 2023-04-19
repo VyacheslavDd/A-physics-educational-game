@@ -30,6 +30,7 @@ public class TriggerDialog : MonoBehaviour
 
     [SerializeField] private bool startAutomatically;
     [SerializeField] private bool hasInfo;
+    [SerializeField] private bool shouldOpponentWait;
 
     private bool isIn;
 
@@ -86,6 +87,7 @@ public class TriggerDialog : MonoBehaviour
                     button.triggerDialog = this;
                     button.activatePlayer = !startAutomatically;
                     button.continueWithPlayer = hasInfo;
+                    button.shouldWaitBeforeCompleting = shouldOpponentWait;
                 }
                 else
                 {
