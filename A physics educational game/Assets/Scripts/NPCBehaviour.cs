@@ -77,7 +77,7 @@ public class NPCBehaviour : MonoBehaviour
         StopAllAnimations();
         animator.SetFloat(horizontal, 1);
         isStanding = true;
-        yield return new WaitForSeconds(pointsToGo.Count > 1 ? 1.5f : 1000f);
+        yield return new WaitForSeconds(pointsToGo.Count > 1 ? 0.3f : 1000f);
         isStanding = false;
         GetCorrectAnimation();
     }
@@ -98,8 +98,11 @@ public class NPCBehaviour : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, pointsToGo[currentPoint].position, speed * Time.deltaTime);
             if (Vector2.Distance(transform.position, pointsToGo[currentPoint].position) < 0.2f)
             {
-                if (currentPoint + addBy == pointsToGo.Count || currentPoint + addBy < 0) addBy *= -1;
-                currentPoint = (currentPoint + addBy);
+                if (pointsToGo.Count > 1)
+                {
+                    if (currentPoint + addBy == pointsToGo.Count || currentPoint + addBy < 0) addBy *= -1;
+                    currentPoint = currentPoint + addBy;
+                }
                 StartCoroutine(Stand());
             }
         }
