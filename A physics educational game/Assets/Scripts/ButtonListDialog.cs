@@ -22,6 +22,8 @@ public class ButtonListDialog : MonoBehaviour
     public bool activatePlayer;
     public bool continueWithPlayer;
     public bool shouldWaitBeforeCompleting;
+    public bool keepSameStory;
+    public bool isScripted;
 
     private void Start()
     {
@@ -46,7 +48,7 @@ public class ButtonListDialog : MonoBehaviour
     {
         if (!story.canContinue)
         {
-            if (activatePlayer)
+            if (activatePlayer || isScripted)
             {
                 playerControl.enabled = true;
                 playerControl.RotateToSpeaker();
@@ -55,13 +57,18 @@ public class ButtonListDialog : MonoBehaviour
             if (continueWithPlayer) playerControl.enabled = true;
             dialogCanvas.SetActive(false);
             if (continueWithPlayer) triggerDialog.ResetStory();
-            else triggerDialog.UpdateStory(!shouldWaitBeforeCompleting ? justRefuseTalking : requireFinishTask);
+            else
+            {
+                if (keepSameStory) triggerDialog.ResetStory();
+                else triggerDialog.UpdateStory(!shouldWaitBeforeCompleting ? justRefuseTalking : requireFinishTask);
+            }
             if (scriptAfter != null)
             {
                 scriptAfter.SetActive(true);
                 scriptAfter = null;
             }
             Cursor.visible = false;
+            if (isScripted) Destroy(triggerDialog.gameObject);
         }
         else
         {

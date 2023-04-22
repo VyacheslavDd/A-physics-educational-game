@@ -7,8 +7,10 @@ public class AddNewStory : MonoBehaviour
     [SerializeField] private TriggerDialog trigger;
     [SerializeField] private TextAsset story;
 
+    [SerializeField] private bool keepSameStory;
+
     private void Start()
     {
-        trigger.UpdateStory(story);
+        trigger.UpdateStory(story, keepSameStory);
     }
 }

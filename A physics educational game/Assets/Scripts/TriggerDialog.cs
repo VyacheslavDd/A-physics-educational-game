@@ -13,6 +13,7 @@ public class TriggerDialog : MonoBehaviour
     private static string mainCharacterName = "Δενθρ";
     [SerializeField] private PlayerControl control;
     [SerializeField] private GameObject dialogCanvas;
+    [SerializeField] private GameObject insertionCanvas;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI sentenceText;
     [SerializeField] private Image characterImage;
@@ -29,8 +30,10 @@ public class TriggerDialog : MonoBehaviour
     [SerializeField] private ClassForSharing shareClass;
 
     [SerializeField] private bool startAutomatically;
+    [SerializeField] private bool isScripted;
     [SerializeField] private bool hasInfo;
     [SerializeField] private bool shouldOpponentWait;
+    [SerializeField] private bool keepSameStory;
 
     private bool isIn;
 
@@ -65,7 +68,8 @@ public class TriggerDialog : MonoBehaviour
     {
         if (collision.GetComponent<PlayerControl>() != null)
         {
-            if ((Input.GetKey(KeyCode.E) || startAutomatically) && !dialogCanvas.activeSelf && !isIn)
+            if ((Input.GetKey(KeyCode.E) || startAutomatically) && 
+                !dialogCanvas.activeSelf && !isIn && !insertionCanvas.activeSelf)
             {
                 if (panel.childCount <= maxTasks.GetAmountOfMaxTasks() || startAutomatically)
                 {
@@ -88,6 +92,8 @@ public class TriggerDialog : MonoBehaviour
                     button.activatePlayer = !startAutomatically;
                     button.continueWithPlayer = hasInfo;
                     button.shouldWaitBeforeCompleting = shouldOpponentWait;
+                    button.keepSameStory = keepSameStory;
+                    button.isScripted = isScripted;
                 }
                 else
                 {
@@ -104,9 +110,11 @@ public class TriggerDialog : MonoBehaviour
         scriptAfter = script;
     }
 
-    public void UpdateStory(TextAsset story)
+    public void UpdateStory(TextAsset story, bool keepSame=false)
     {
+        jsonDATA = story;
         this.story = new Story(story.text);
+        keepSameStory = keepSame;
     }
 
     public void ResetStory()
@@ -117,7 +125,7 @@ public class TriggerDialog : MonoBehaviour
     public void FinishDialogue()
     {
         isIn = false;
-        transform.parent.GetComponent<NPCBehaviour>().FinishDialogue();
+        if (!isScripted) transform.parent.GetComponent<NPCBehaviour>().FinishDialogue();
     }
 
     private void UpdateSpeakerInfo(string name, Sprite character)

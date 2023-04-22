@@ -14,26 +14,23 @@ public class ShowInsertionInfo : MonoBehaviour
 
     [SerializeField] private PlayerControl control;
 
+    [SerializeField] private GameObject nextScript;
+
     private void Start()
     {
         infoText.text = info;
         insertionCanvas.SetActive(true);
         control.enabled = false;
         control.ResetAnimations();
-        if (shouldEnableControl)
-            StartCoroutine(AwaitInsertion());
-        else
-        {
-            insertionCanvas.SetActive(false);
-            Destroy(gameObject);
-        }
+        StartCoroutine(AwaitInsertion());
     }
 
     private IEnumerator AwaitInsertion()
     {
         yield return new WaitForSeconds(5f);
-        control.enabled = true;
+        if (shouldEnableControl) control.enabled = true;
         insertionCanvas.SetActive(false);
+        if (nextScript != null) nextScript.SetActive(true);
         Destroy(gameObject);
     }
 
