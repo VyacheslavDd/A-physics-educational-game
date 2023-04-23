@@ -68,6 +68,7 @@ public class ButtonListDialog : MonoBehaviour
                 scriptAfter = null;
             }
             Cursor.visible = false;
+            triggerDialog.StopAllCoroutines();
             if (isScripted) Destroy(triggerDialog.gameObject);
         }
         else

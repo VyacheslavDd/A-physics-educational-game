@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class OpenScriptsOnStart : MonoBehaviour
 {
-    [SerializeField] private GameObject nextScript;
+    [SerializeField] private List<GameObject> nextScripts;
+
+    [SerializeField] private bool shouldDelete = true;
 
     private void Start()
     {
-        nextScript.SetActive(true);
-        Destroy(gameObject);
+        foreach (var obj in nextScripts)
+        {
+            obj.SetActive(true);
+        }
+        if (shouldDelete) Destroy(gameObject);
     }
 }
