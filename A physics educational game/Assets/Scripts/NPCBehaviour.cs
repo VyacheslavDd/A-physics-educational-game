@@ -77,7 +77,7 @@ public class NPCBehaviour : MonoBehaviour
         StopAllAnimations();
         animator.SetFloat(horizontal, 1);
         isStanding = true;
-        yield return new WaitForSeconds(pointsToGo.Count > 1 ? 0.3f : 1000f);
+        yield return new WaitForSeconds(pointsToGo.Count > 1 ? 0.05f : 1000f);
         isStanding = false;
         GetCorrectAnimation();
     }

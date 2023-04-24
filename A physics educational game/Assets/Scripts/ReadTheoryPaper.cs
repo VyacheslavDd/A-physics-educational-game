@@ -8,15 +8,17 @@ public class ReadTheoryPaper : MonoBehaviour
     [SerializeField] private GameObject theoryCanvas;
     [SerializeField] private GameObject pauseCanvas;
     [SerializeField] private PlayerControl control;
-
+    [SerializeField] private GameObject dialogCanvas;
     [SerializeField] private Image readMention;
+
+    public bool isInteractable;
 
     private bool isReading;
     private bool isIn;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerControl>() != null)
+        if (collision.GetComponent<PlayerControl>() != null && isInteractable && !dialogCanvas.activeSelf)
         {
             if (!isReading) readMention.gameObject.SetActive(true);
             else readMention.gameObject.SetActive(false);
@@ -43,6 +45,7 @@ public class ReadTheoryPaper : MonoBehaviour
 
     private void Update()
     {
+        if (dialogCanvas.activeSelf && theoryCanvas.activeSelf) theoryCanvas.SetActive(false);
         if (Input.GetKeyDown(KeyCode.E) && isIn && !pauseCanvas.activeSelf) InteractWithPaper();
     }
 }

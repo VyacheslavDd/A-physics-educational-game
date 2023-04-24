@@ -14,6 +14,7 @@ public class HoldTestWithInputAnswer : MonoBehaviour
     [SerializeField] private TMP_InputField field;
     [SerializeField] private TextMeshProUGUI question;
     [SerializeField] private ClassForSharing shareClass;
+    [SerializeField] private TypeCoroutine typing;
 
     public float AwaitTime;
 
@@ -34,16 +35,12 @@ public class HoldTestWithInputAnswer : MonoBehaviour
         field.textComponent.color = standardColor;
     }
 
-    public IEnumerator TypeQuestion(string question)
+    public void TypeQuestion(string question)
     {
         this.question.text = "";
         field.text = "";
-        var time = shareClass.basicTextSpeed * (1 - PlayerPrefs.GetFloat("textSpeed", shareClass.basicPercent) / 100);
-        foreach (var letter in question)
-        {
-            this.question.text += letter;
-            yield return new WaitForSeconds(time);
-        }
+        StopAllCoroutines();
+        StartCoroutine(typing.TypeText(this.question, question));
     }
 
     public (string question, string answer) GetNextQuestion()

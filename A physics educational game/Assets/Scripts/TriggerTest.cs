@@ -41,7 +41,7 @@ public class TriggerTest : MonoBehaviour
             control.ResetAnimations();
             testManager.SetQuestions(questions);
             currentQuestion = testManager.GetNextQuestion();
-            StartCoroutine(testManager.TypeQuestion(currentQuestion.question));
+            testManager.TypeQuestion(currentQuestion.question);
 
         }
     }
@@ -70,6 +70,6 @@ public class TriggerTest : MonoBehaviour
             Cursor.visible = false;
         }
         else
-            StartCoroutine(testManager.TypeQuestion(currentQuestion.question));
+            testManager.TypeQuestion(currentQuestion.question);
     }
 }

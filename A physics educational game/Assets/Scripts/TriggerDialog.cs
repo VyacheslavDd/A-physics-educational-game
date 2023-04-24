@@ -29,6 +29,8 @@ public class TriggerDialog : MonoBehaviour
     [SerializeField] private GameObject talkWarning;
     [SerializeField] private ClassForSharing shareClass;
 
+    [SerializeField] private TypeCoroutine typing;
+
     [SerializeField] private bool startAutomatically;
     [SerializeField] private bool isScripted;
     [SerializeField] private bool hasInfo;
@@ -142,16 +144,6 @@ public class TriggerDialog : MonoBehaviour
         var meaning = sentence.Substring(2);
         if (author == 'c') UpdateSpeakerInfo(mainCharacterName, myCharacterSprite);
         else UpdateSpeakerInfo(characterName, characterSprite);
-        StartCoroutine(writeSentenceLetterByLetter(sentenceText, meaning));
-    }
-
-    private IEnumerator writeSentenceLetterByLetter(TextMeshProUGUI text, string sentence)
-    {
-        var time = shareClass.basicTextSpeed * (1 - PlayerPrefs.GetFloat("textSpeed", shareClass.basicPercent) / 100);
-        foreach (var letter in sentence)
-        {
-            text.text += letter;
-            yield return new WaitForSeconds(time);
-        }
+        StartCoroutine(typing.TypeText(sentenceText, meaning));
     }
 }

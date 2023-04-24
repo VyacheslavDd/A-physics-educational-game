@@ -7,6 +7,8 @@ public class HandlePapers : MonoBehaviour
 {
     [SerializeField] private List<GameObject> papers;
 
+    public bool allowedToMoveObjects;
+
     private int counter = 0;
 
     public void CollectPaper()

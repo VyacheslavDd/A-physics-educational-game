@@ -9,6 +9,7 @@ public class MoveObject : MonoBehaviour
     [SerializeField] private GameObject dialogCanvas;
     [SerializeField] private GameObject taskCanvas;
     [SerializeField] private PlayerControl control;
+    [SerializeField] private HandlePapers papers;
 
     [SerializeField] private Vector3 finishPosition;
     [SerializeField] private Vector3 step;
@@ -18,17 +19,17 @@ public class MoveObject : MonoBehaviour
 
     private void Start()
     {
-        initialPosition = grid.position;
+        initialPosition = grid.localPosition;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerControl>() != null && control.enabled && !taskCanvas.activeSelf)
         {
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKey(KeyCode.E) && papers.allowedToMoveObjects)
             {
-                grid.position += step;
-                if (Vector3.Distance(grid.position, moveToFinish ? finishPosition : initialPosition) < 0.03f)
+                grid.localPosition += step;
+                if (Vector3.Distance(grid.localPosition, moveToFinish ? finishPosition : initialPosition) < 0.03f)
                 {
                     moveToFinish = !moveToFinish;
                     step *= -1;
