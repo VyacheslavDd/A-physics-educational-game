@@ -37,4 +37,9 @@ public class MoveObject : MonoBehaviour
             }
         }
     }
+
+    public void ResetPosition()
+    {
+        grid.localPosition = initialPosition;
+    }
 }

@@ -17299,6 +17299,7 @@ GameObject:
   - component: {fileID: 324023294}
   - component: {fileID: 324023293}
   - component: {fileID: 324023295}
+  - component: {fileID: 324023296}
   m_Layer: 0
   m_Name: Go Home
   m_TagString: Untagged
@@ -17354,6 +17355,19 @@ MonoBehaviour:
   cannotLeaveTrigger: {fileID: 897305643}
   bound: {fileID: 1221483108}
   endGameTrigger: {fileID: 1966649009}
+--- !u!114 &324023296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324023292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e8783c46920498409761f0fe660fb14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TaskToDelete: {fileID: 0}
 --- !u!1 &333543009
 GameObject:
   m_ObjectHideFlags: 0
@@ -19511,7 +19525,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 500858213}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.343143, y: 18.69925, z: 223.14516}
+  m_LocalPosition: {x: 8.21, y: 21.95, z: 223.14516}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19934,7 +19948,7 @@ MonoBehaviour:
   panel: {fileID: 640842599}
   taskUpdatedMention: {fileID: 1604999137}
   infoCoroutine: {fileID: 640764014}
-  trackTask: {fileID: 0}
+  trackTask: {fileID: 805606163}
 --- !u!114 &534650263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24679,6 +24693,117 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &805606158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 805606164}
+  - component: {fileID: 805606163}
+  - component: {fileID: 805606162}
+  - component: {fileID: 805606161}
+  - component: {fileID: 805606160}
+  - component: {fileID: 805606159}
+  m_Layer: 0
+  m_Name: Come back to Sinitsin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &805606159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805606158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e8d75eaa6fa354d8cea964a09c9538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog: {fileID: 1016485701}
+  behaviour: {fileID: 836567181}
+--- !u!114 &805606160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805606158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d215dac18289dbd48a13aec2f7d96b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskPrefab: {fileID: 4873723126014301979, guid: c40d0bf91be656b43be058a7b237ebbd, type: 3}
+  taskText: "\u041E\u0442\u0434\u0430\u0439\u0442\u0435 \u0437\u0430\u0434\u0430\u0447\u043D\u0438\u043A
+    \u041D\u0438\u043A\u043E\u043B\u0430\u044E \u0418\u0432\u0430\u043D\u043E\u0432\u0438\u0447\u0443"
+  panel: {fileID: 640842599}
+  taskUpdatedMention: {fileID: 1604999137}
+  infoCoroutine: {fileID: 640764014}
+  trackTask: {fileID: 324023296}
+--- !u!114 &805606161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805606158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b937e5ab5c034448bf72ede880ac2e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: {fileID: 1016485701}
+  story: {fileID: 4900000, guid: 94871844f579bc942a83a917ef272f6f, type: 3}
+  keepSameStory: 0
+--- !u!114 &805606162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805606158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4590a34db0d7a8b468321b780ff56a6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog: {fileID: 1016485701}
+  scriptAfter: {fileID: 324023292}
+--- !u!114 &805606163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805606158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e8783c46920498409761f0fe660fb14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TaskToDelete: {fileID: 0}
+--- !u!4 &805606164
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805606158}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1405706793}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &810371106
 GameObject:
   m_ObjectHideFlags: 0
@@ -24888,7 +25013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointsToGo: []
   player: {fileID: 1382354240}
-  speed: 12
+  speed: 5
 --- !u!95 &836567183
 Animator:
   serializedVersion: 5
@@ -60283,6 +60408,7 @@ Transform:
   - {fileID: 215470888}
   - {fileID: 764947627}
   - {fileID: 534650261}
+  - {fileID: 805606164}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -61270,6 +61396,7 @@ MonoBehaviour:
   - {fileID: 1756371352}
   - {fileID: 1814694014}
   - {fileID: 1218108604}
+  nextScript: {fileID: 805606158}
   allowedToMoveObjects: 0
 --- !u!4 &1567079903
 Transform:
