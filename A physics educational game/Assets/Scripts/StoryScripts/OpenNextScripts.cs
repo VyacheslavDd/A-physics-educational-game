@@ -8,15 +8,25 @@ public class OpenNextScripts : MonoBehaviour
     [SerializeField] private List<GameObject> nextScript;
     [SerializeField] private GameObject objToEnter;
 
+    private Key key;
+
+    private void Start()
+    {
+        key = gameObject.GetComponent<Key>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject == objToEnter)
         {
-            foreach (var obj in nextScript)
+            if (key == null || (key != null && key.CanPickUp))
             {
-                obj.SetActive(true);
+                foreach (var obj in nextScript)
+                {
+                    obj.SetActive(true);
+                }
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
     }
 }
