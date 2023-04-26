@@ -31,6 +31,7 @@ public class ReadTheoryPaper : MonoBehaviour
     private void InteractWithPaper()
     {
         isReading = !isReading;
+        Cursor.visible = isReading;
         theoryCanvas.SetActive(isReading);
         control.enabled = !isReading;
         control.ResetAnimations();
@@ -45,7 +46,11 @@ public class ReadTheoryPaper : MonoBehaviour
 
     private void Update()
     {
-        if (dialogCanvas.activeSelf && theoryCanvas.activeSelf) theoryCanvas.SetActive(false);
+        if (dialogCanvas.activeSelf && theoryCanvas.activeSelf) 
+        {
+            theoryCanvas.SetActive(false);
+            Cursor.visible = false;
+        };
         if (Input.GetKeyDown(KeyCode.E) && isIn && !pauseCanvas.activeSelf) InteractWithPaper();
     }
 }
