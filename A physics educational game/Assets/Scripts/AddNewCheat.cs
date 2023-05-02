@@ -13,6 +13,6 @@ public class AddNewCheat : MonoBehaviour
     private void Start()
     {
         partOfCheat.SetActive(true);
-        StartCoroutine(info.DoInfoCoroutine(infoCheatText, 2f));
+        info.InitiateMessageCoroutine(infoCheatText, 2f);
     }
 }

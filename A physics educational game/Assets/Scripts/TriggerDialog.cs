@@ -101,7 +101,7 @@ public class TriggerDialog : MonoBehaviour
                 {
                     warning.GetComponent<TextMeshProUGUI>().text = $"You already have {maxTasks.GetStringInterpretation()} task(s)!";
                     StopAllCoroutines();
-                    StartCoroutine(infoCoroutine.DoInfoCoroutine(warning, 3));
+                    infoCoroutine.InitiateMessageCoroutine(warning, 3);
                 }
             }
         }

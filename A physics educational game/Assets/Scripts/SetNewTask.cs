@@ -19,6 +19,6 @@ public class SetNewTask : MonoBehaviour
         if (trackTask != null)
             trackTask.TaskToDelete = task;
         StopAllCoroutines();
-        StartCoroutine(infoCoroutine.DoInfoCoroutine(taskUpdatedMention.gameObject, 3));
+        infoCoroutine.InitiateMessageCoroutine(taskUpdatedMention.gameObject, 3);
     }
 }

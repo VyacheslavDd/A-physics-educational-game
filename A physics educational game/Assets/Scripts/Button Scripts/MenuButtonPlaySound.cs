@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MenuButtonPlaySound : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
 {
     private AudioSource source;
+    private Button button;
 
     [SerializeField] private AudioClip pointClip;
     [SerializeField] private AudioClip clickClip;
@@ -14,19 +16,26 @@ public class MenuButtonPlaySound : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        additional.clip = clickClip;
-        additional.Play();
+        if (button.interactable)
+        {
+            additional.clip = clickClip;
+            additional.Play();
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        source.clip = pointClip;
-        source.Play();
+        if (button.interactable)
+        {
+            source.clip = pointClip;
+            source.Play();
+        }
     }
 
     private void Start()
     {
         source = GetComponent<AudioSource>();
+        button = GetComponent<Button>();
     }
 
     private void Update()
