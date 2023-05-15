@@ -12,6 +12,8 @@ public class SetNewTask : MonoBehaviour
     [SerializeField] private InfoCoroutine infoCoroutine;
     [SerializeField] private DeleteTaskAfterCompleting trackTask;
 
+    [SerializeField] private bool ShouldSendMessage = true;
+
     private void Start()
     {
         var task = Instantiate(taskPrefab, panel);
@@ -19,6 +21,6 @@ public class SetNewTask : MonoBehaviour
         if (trackTask != null)
             trackTask.TaskToDelete = task;
         StopAllCoroutines();
-        infoCoroutine.InitiateMessageCoroutine(taskUpdatedMention.gameObject, 3);
+        if (ShouldSendMessage) infoCoroutine.InitiateMessageCoroutine(taskUpdatedMention.gameObject, 3);
     }
 }

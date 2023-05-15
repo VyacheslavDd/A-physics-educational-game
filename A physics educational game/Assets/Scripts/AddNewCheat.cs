@@ -10,10 +10,12 @@ public class AddNewCheat : MonoBehaviour
 
     [SerializeField] private GameObject infoCheatText;
 
+    [SerializeField] private bool ShouldSendMessage = true;
+
     private void Start()
     {
         foreach (var part in partOfCheat)
             part.SetActive(true);
-        info.InitiateMessageCoroutine(infoCheatText, 2f);
+        if (ShouldSendMessage) info.InitiateMessageCoroutine(infoCheatText, 2f);
     }
 }

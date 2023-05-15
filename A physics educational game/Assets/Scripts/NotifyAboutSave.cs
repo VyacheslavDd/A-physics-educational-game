@@ -7,8 +7,10 @@ public class NotifyAboutSave : MonoBehaviour
     [SerializeField] private GameObject saveNotifyText;
     [SerializeField] private InfoCoroutine infoCoroutine;
 
+    [SerializeField] private bool ShouldSendMessage = true;
+
     private void Start()
     {
-        infoCoroutine.InitiateMessageCoroutine(saveNotifyText, 2.5f);
+        if (ShouldSendMessage) infoCoroutine.InitiateMessageCoroutine(saveNotifyText, 2.5f);
     }
 }
