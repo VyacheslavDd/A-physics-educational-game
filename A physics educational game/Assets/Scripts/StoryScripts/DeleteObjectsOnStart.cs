@@ -10,7 +10,8 @@ public class DeleteObjectsOnStart : MonoBehaviour
     {
         foreach (var obj in objectsToDelete)
         {
-            Destroy(obj);
+            if (obj != null)
+                Destroy(obj);
         }
     }
 }

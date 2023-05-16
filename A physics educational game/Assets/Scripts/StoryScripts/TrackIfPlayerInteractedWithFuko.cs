@@ -8,6 +8,7 @@ public class TrackIfPlayerInteractedWithFuko : MonoBehaviour
     [SerializeField] private string triggerAnimation;
 
     [SerializeField] private GameObject nextScript;
+    [SerializeField] private GameObject ReminderText;
 
     private bool hasInteracted;
 
@@ -18,6 +19,7 @@ public class TrackIfPlayerInteractedWithFuko : MonoBehaviour
             hasInteracted = true;
             fuko.SetTrigger(triggerAnimation);
             nextScript.SetActive(true);
+            ReminderText.SetActive(false);
         }
     }
 }

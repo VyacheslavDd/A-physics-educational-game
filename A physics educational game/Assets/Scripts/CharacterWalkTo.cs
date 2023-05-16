@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CharacterWalkTo : MonoBehaviour
 {
+    [SerializeField] private bool disableTriggerWhenWalking = true;
+
     [SerializeField] private TriggerDialog dialog;
     [SerializeField] private NPCBehaviour behaviour;
 
@@ -11,7 +13,8 @@ public class CharacterWalkTo : MonoBehaviour
 
     private void Start()
     {
-        dialog.gameObject.SetActive(false);
+        if (disableTriggerWhenWalking)
+            dialog.gameObject.SetActive(false);
         behaviour.UpdatePointsToGo(pointsToGo);
     }
 }
