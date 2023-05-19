@@ -129,6 +129,8 @@ public class NPCBehaviour : MonoBehaviour
 
     public void UpdatePointsToGo(List<Transform> points)
     {
+        if (points.Count == 0) isStanding = true;
+        else isStanding = false;
         currentPoint = 0;
         pointsToGo = points;
         GetCorrectAnimation();
