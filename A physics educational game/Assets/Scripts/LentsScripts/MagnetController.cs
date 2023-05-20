@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class MagnetController : MonoBehaviour
 {
+    public bool IsHeld { get; set; }
+
     private RectTransform rectTransform;
     [SerializeField] private float moveSpeed = 5;
+
+    private bool canHold;
+
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -29,5 +34,18 @@ public class MagnetController : MonoBehaviour
         {
             rectTransform.localPosition += new Vector3(moveSpeed, 0, 0);
         }
+        if (Input.GetKey(KeyCode.E) && canHold)
+        {
+            IsHeld = true;
+        }
+        if (!Input.GetKey(KeyCode.E))
+        {
+            IsHeld = false;
+        }
+    }
+
+    public void EnablePossibilityToHold()
+    {
+        canHold = true;
     }
 }
