@@ -67,7 +67,7 @@ public class OnMagnetEntered : MonoBehaviour
     {
         while (true)
         {
-            if (Math.Abs(transform.parent.eulerAngles.y) - 90 <= 1f && Math.Abs(transform.parent.eulerAngles.y) - 90 >= 0)
+            if (Math.Abs(transform.parent.eulerAngles.y) - 90 <= 1f && Math.Abs(transform.parent.eulerAngles.y) - 90 >= 0 && remainedRotation == 0)
             {
                 remainedRotation += 3f;
             }
