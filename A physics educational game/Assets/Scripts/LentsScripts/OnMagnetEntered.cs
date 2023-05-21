@@ -54,8 +54,8 @@ public class OnMagnetEntered : MonoBehaviour
 
     private void DoPushing()
     {
-        if (transform.parent.eulerAngles.y >= 0 && transform.parent.eulerAngles.y <= 180 && yRotationPush < 0) yRotationPush *= -1;
-        if (transform.parent.eulerAngles.y < 0 && transform.parent.eulerAngles.y > -180 && yRotationPush > 0) yRotationPush *= -1;
+        //if (transform.parent.eulerAngles.y > 0 && transform.parent.eulerAngles.y <= 180 && yRotationPush < 0) if (!doBackwards) yRotationPush *= -1;
+        //if (transform.parent.eulerAngles.y <= 0 && transform.parent.eulerAngles.y > -180 && yRotationPush > 0) if (!doBackwards) yRotationPush *= -1;
         counter += 1;
         remainedRotation += Math.Abs(yRotationPush);
         if (!entered) StartCoroutine(Push());
@@ -67,20 +67,20 @@ public class OnMagnetEntered : MonoBehaviour
     {
         while (true)
         {
-            if (Math.Abs(transform.parent.eulerAngles.y) - 90 <= 0.005f && Math.Abs(transform.parent.eulerAngles.y) - 90 >= 0)
+            if (Math.Abs(transform.parent.eulerAngles.y) - 90 <= 1f && Math.Abs(transform.parent.eulerAngles.y) - 90 >= 0)
             {
-                transform.parent.Rotate(new Vector3(0, 1, 0));
+                remainedRotation += 3f;
             }
             if (remainedRotation > 0)
             {
-                if (controller.enabled && !doBackwards) controller.enabled = false;
+                //if (controller.enabled && !doBackwards) controller.enabled = false;
                 transform.parent.Rotate(new Vector3(0, yRotationPush > 0 ? yRotationValuePerTime : -yRotationValuePerTime, 0));
                 remainedRotation -= yRotationValuePerTime;
             }
             else
             {
                 remainedRotation = 0;
-                if (!controller.enabled) controller.enabled = true;
+                //if (!controller.enabled) controller.enabled = true;
             }
             yield return new WaitForSeconds(timeRotation);
             if (counter == counterInteraction)
@@ -94,8 +94,8 @@ public class OnMagnetEntered : MonoBehaviour
 
     private void SetArrowDestination()
     {
-        arrowLeft.SetActive(yRotationPush > 0 ? true : false);
-        arrowRight.SetActive(yRotationPush < 0 ? true : false);
+        arrowRight.SetActive(yRotationPush > 0 ? true : false);
+        arrowLeft.SetActive(yRotationPush < 0 ? true : false);
     }
 
     public void ForcePush()

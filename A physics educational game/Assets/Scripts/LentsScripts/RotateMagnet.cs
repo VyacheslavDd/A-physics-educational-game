@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class RotateMagnet : MonoBehaviour
 {
-    [SerializeField] private float yDelta;
-    [SerializeField] private RectTransform magnetTransform;
+    [SerializeField] private MagnetController magnetController;
+    [SerializeField] private bool isRotated;
     private void Start()
     {
-        magnetTransform.Rotate(new Vector3(yDelta, 0, 0));
+        magnetController.IsRotated = isRotated;
     }
 }
