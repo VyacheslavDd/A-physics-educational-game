@@ -6,11 +6,15 @@ using UnityEngine;
 public class ShowResult : MonoBehaviour
 {
     [SerializeField] private GameObject allCorrectScript;
-    [SerializeField] private GameObject notIdealResultScript;
+    [SerializeField] private GameObject notIdealResultSequence;
 
     [SerializeField] private TypeCoroutine typeCoroutine;
 
     [SerializeField] private TextMeshProUGUI text;
+
+    [SerializeField] private FukoTaskManager fukoTaskManager;
+
+    [SerializeField] private BoxCollider2D playerCollider;
 
    public IEnumerator DisplayResult(int correctAnswers, int questionsAmount)
     {
@@ -27,12 +31,19 @@ public class ShowResult : MonoBehaviour
         }
         else
         {
-            script = notIdealResultScript;
+            script = notIdealResultSequence;
             text.color = new Color32(255, 0, 0, 255);
         }
 
         yield return new WaitForSeconds(1.5f);
+
+        playerCollider.enabled = true;
         script.SetActive(true);
         gameObject.SetActive(false);
+    }
+
+    public void UpdateNotIdealScript(GameObject script)
+    {
+        notIdealResultSequence = script;
     }
 }

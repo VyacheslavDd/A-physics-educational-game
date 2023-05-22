@@ -38,7 +38,6 @@ public class FukoTaskManager : MonoBehaviour
     {
         currentState = states[currentIndex];
         currentState.SetActive(true);
-
         StartCoroutine(currentState.GetComponent<ShowState>().DisplayState());
     }
 
@@ -47,6 +46,7 @@ public class FukoTaskManager : MonoBehaviour
         Shuffle.ShuffleArray(new System.Random(), states);
         correctAnswers = 0;
         currentIndex = 0;
+        transform.parent.gameObject.SetActive(true);
         SetStateActive();
     }
 
