@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class RestartTask : MonoBehaviour
 {
-    [SerializeField] private FukoTaskManager fukoTaskManager;
+    [SerializeField] private TestTaskManager taskManager;
 
     private void Start()
     {
-        fukoTaskManager.FormStateSequence();
+        taskManager.FormStateSequence();
     }
 }

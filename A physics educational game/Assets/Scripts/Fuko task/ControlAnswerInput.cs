@@ -9,7 +9,7 @@ public class ControlAnswerInput : MonoBehaviour
     [SerializeField] private GameObject noButton;
     [SerializeField] private GameObject image;
 
-    [SerializeField] private FukoTaskManager fukoTaskManager;
+    [SerializeField] private TestTaskManager fukoTaskManager;
 
     private bool canPress = true;
 

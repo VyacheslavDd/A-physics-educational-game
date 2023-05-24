@@ -12,7 +12,7 @@ public class ShowResult : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI text;
 
-    [SerializeField] private FukoTaskManager fukoTaskManager;
+    [SerializeField] private TestTaskManager taskManager;
 
     [SerializeField] private BoxCollider2D playerCollider;
 

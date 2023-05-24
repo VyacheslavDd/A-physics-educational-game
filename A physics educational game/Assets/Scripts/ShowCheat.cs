@@ -13,8 +13,15 @@ public class ShowCheat : MonoBehaviour
     private void Update()
     {
         if (Input.GetKey(KeyCode.Q) && (control.enabled || testCanvas.activeSelf) && !taskCanvas.activeSelf)
+        {
             cheatSheet.SetActive(true);
+            Cursor.visible = true;
+        }
 
-        else cheatSheet.SetActive(false);
+        else
+        {
+            cheatSheet.SetActive(false);
+            Cursor.visible = false;
+        }
     }
 }

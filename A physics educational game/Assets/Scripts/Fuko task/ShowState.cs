@@ -11,8 +11,7 @@ public class ShowState : MonoBehaviour
     [SerializeField] private TextMeshProUGUI state;
 
     [SerializeField] private GameObject image;
-    [SerializeField] private GameObject yesButton;
-    [SerializeField] private GameObject noButton;
+    [SerializeField] private List<GameObject> choices;
 
     [SerializeField] private TypeCoroutine typeCoroutine;
 
@@ -25,15 +24,24 @@ public class ShowState : MonoBehaviour
 
     public IEnumerator DisplayState()
     {
+        foreach (var choice in choices)
+        {
+            if (choice.activeSelf) choice.SetActive(false);
+        }
+
+        if (controlInput != null && controlInput.enabled) controlInput.enabled = false;
         state.text = "";
         StartCoroutine(typeCoroutine.TypeText(state, stateText));
         yield return new WaitForSeconds(3f);
         if (image != null) image.SetActive(true);
         yield return new WaitForSeconds(1f);
-        yesButton.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        noButton.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        controlInput.enabled = true;
+        foreach (var choice in choices)
+        {
+            choice.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            var btn = choice.GetComponent<Button>();
+            if (btn != null) btn.interactable = true;
+        }
+        if (controlInput != null) controlInput.enabled = true;
     }
 }
