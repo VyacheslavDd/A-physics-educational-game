@@ -6,6 +6,7 @@ public class OpenScriptWithDelay : MonoBehaviour
 {
     [SerializeField] private float delay;
     [SerializeField] private GameObject nextScript;
+    [SerializeField] private bool shouldDelete = true;
 
     private void Start()
     {
@@ -16,6 +17,6 @@ public class OpenScriptWithDelay : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         nextScript.SetActive(true);
-        Destroy(gameObject);
+        if (shouldDelete) Destroy(gameObject);
     }
 }
