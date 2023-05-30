@@ -10,6 +10,7 @@ public class SetSettingsOnEnter : MonoBehaviour
 
     private void Start()
     {
+        if (!Cursor.visible) Cursor.visible = true;
         shareClass = GetComponent<ClassForSharing>();
         var resolution = PlayerPrefs.GetString("resolution", shareClass.basicResolution);
         var fullScreenCheck = PlayerPrefs.GetInt("isFull", 1);

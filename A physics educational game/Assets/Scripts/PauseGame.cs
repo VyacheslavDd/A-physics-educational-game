@@ -16,6 +16,8 @@ public class PauseGame : MonoBehaviour
 
     private void Update()
     {
+        if (!Cursor.visible) Cursor.visible = true;
+
         if (Input.GetKeyDown(KeyCode.Escape) && CheckIfCanvasesDisabled())
         {
             if (!paused)
