@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private RectTransform rectTransform;
     private Image img;
     private EntityCharacteristicBehaviour staminaBehaviour;
+    private ShootingPaper shooting;
 
     private float initialSpeed;
 
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private float speedMultiplier;
+    [SerializeField] private float throwingSpeed;
 
     [SerializeField] private Slider health;
     [SerializeField] private Slider stamina;
@@ -26,7 +28,7 @@ public class PlayerController : MonoBehaviour
     public bool CanMoveUp;
     public bool CanMoveDown;
 
-    private bool isMoving;
+    public bool isMoving;
 
 
     private void Start()
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
         img = GetComponent<Image>();
         staminaBehaviour = stamina.gameObject.GetComponent<EntityCharacteristicBehaviour>();
+        shooting = GetComponent<ShootingPaper>();
         initialSpeed = speed;
     }
 
@@ -78,6 +81,10 @@ public class PlayerController : MonoBehaviour
             img.sprite = right;
         }
 
-
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (shooting.CanThrow)
+                shooting.Shoot(throwingSpeed);
+        }
     }
 }

@@ -32,7 +32,7 @@ public class EntityCharacteristicBehaviour : MonoBehaviour
     private IEnumerator AwaitTime()
     {
         awaiting = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         awaiting = false;
     }
 
