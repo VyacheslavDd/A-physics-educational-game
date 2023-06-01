@@ -65,7 +65,7 @@ public class ShootingPaper : MonoBehaviour
             lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(rectTransform.position.x, rectTransform.position.y);
 
             lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-
+            lookAngle = Mathf.Clamp(lookAngle, -90, 90);
         }
         else
         {

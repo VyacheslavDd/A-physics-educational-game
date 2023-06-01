@@ -26,7 +26,7 @@ public class MandrelController : MonoBehaviour
     {
         if (InChangeLightZone)
         {
-            var delta = Math.Abs(rectTransform.localPosition.y - initialYPosition);
+            var delta = Math.Abs(rectTransform.localPosition.y - initialYPosition) + 5;
             if (delta < 0) delta = 0;
             if (delta > 255) delta = 255;
             lamp.color = new Color32(255, 255, (byte)delta, 255);
