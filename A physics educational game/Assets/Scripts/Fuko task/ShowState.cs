@@ -40,7 +40,9 @@ public class ShowState : MonoBehaviour
             choice.SetActive(true);
             yield return new WaitForSeconds(1f);
             var btn = choice.GetComponent<Button>();
+            var dropdown = choice.GetComponent<TMP_Dropdown>();
             if (btn != null) btn.interactable = true;
+            if (dropdown != null) dropdown.interactable = true;
         }
         if (controlInput != null) controlInput.enabled = true;
     }
