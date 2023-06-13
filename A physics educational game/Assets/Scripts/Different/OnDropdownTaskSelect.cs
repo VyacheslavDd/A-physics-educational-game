@@ -23,7 +23,7 @@ public class OnDropdownTaskSelect : MonoBehaviour
         dropdown.interactable = false;
         yield return new WaitForSeconds(1f);
         var answer = dropdown.value;
-        dropdown.value = -1;
+        dropdown.value = 0;
         resource.SetActive(false);
         if (answer == checker.RightValue) manager.ProcedeToNextPage(true);
         else manager.ProcedeToNextPage(false);
@@ -31,7 +31,7 @@ public class OnDropdownTaskSelect : MonoBehaviour
 
     public void OnOptionSelect()
     {
-        if (dropdown.interactable)
+        if (dropdown.interactable && dropdown.value > 0)
             StartCoroutine(AfterSelection());
     }
 }
