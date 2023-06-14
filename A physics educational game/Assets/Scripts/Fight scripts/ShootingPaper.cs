@@ -50,7 +50,7 @@ public class ShootingPaper : MonoBehaviour
     private void Update()
     {
         if (lookToPlayer)
-            reloadTime = initialReloadTime - (health.maxValue - health.value) / 20 * 0.5f;
+            reloadTime = initialReloadTime - (health.maxValue - health.value) / 40 * 0.5f;
 
         passedTime += Time.deltaTime;
         if (passedTime >= reloadTime && !CanThrow)

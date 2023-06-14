@@ -39,7 +39,7 @@ public class OpponentBehaviour : MonoBehaviour
     private void Update()
     {
         if (shooting.CanThrow)
-            shooting.Shoot(throwingSpeed + (health.maxValue - health.value) / 10 * 2);
+            shooting.Shoot(throwingSpeed + (health.maxValue - health.value) / 30 * 2);
 
         if (health.value <= 0)
         {
@@ -57,6 +57,6 @@ public class OpponentBehaviour : MonoBehaviour
         else
             img.sprite = down;
 
-        yMove = (minSpeed + random.NextDouble() * (maxSpeed - minSpeed) + (health.maxValue - health.value) / 30) * multiplier;
+        yMove = (minSpeed + random.NextDouble() * (maxSpeed - minSpeed) + (health.maxValue - health.value) / 60) * multiplier;
     }
 }
